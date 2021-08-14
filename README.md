@@ -16,6 +16,14 @@ Assuming you are going to change your module name from simplemod to something mo
 Windows extra
 ===========================
 
+Git for Windows
+---------------
+Install 'Git for Windows' from https://gitforwindows.org/, then you'll be able to use 'Git Bash' command line for many tasks.
+
+This is further described in the free course:
+
+MoodleBites for TechPrep - https://www.moodlebites.com/enrol/index.php?id=228
+
 Line endings
 ------------
 
@@ -59,7 +67,7 @@ Navigate to your admin dashboard and install the new module.
 
 For newbie users
 ================
-You may notice a reference to a local class debugging.  This is a simple script that allows you to output debugging information to file.
+You may notice a reference to a local class debugging.  This is a simple script that allows you to output debugging information to the error log.
 
 It looks like this"
 
@@ -68,19 +76,12 @@ namespace mod_simplemod\local;
 
 class debugging {
     public static function logit($message, $value) {
-
-        $file = fopen('mylog.log', 'a');
-
-        if ($file) {
-            fwrite($file, print_r($message, true));
-            fwrite($file, print_r($value, true));
-            fwrite($file, "\n");
-            try {
-                throw new \Exception();
-            } catch(\Exception $e) {
-                fwrite($file, 'Trace: '.$e->getTraceAsString());
-            }
-            fclose($file);
+        error_log(print_r($message, true));
+        error_log(print_r($value, true));
+        try {
+            throw new \Exception();
+        } catch(\Exception $e) {
+            error_log('Trace: '.$e->getTraceAsString().PHP_EOL);
         }
     }
 }
@@ -99,12 +100,7 @@ Brackets, Sublime, PHP Storm and many other editors or IDEs use this.  If you ar
 
 Windows users
 =============
-Whether by choice or not, many people are stuck with MS.  Xampp is a workable development environment.  Install the basic Xampp rather than the Moodle/Xampp package.  Install Moodle under htdocs and change the existing index file if desired.
-
-Also install, at minumum, Git for Windows (even if you don't use it - and you should - you can use the git bash command line for many tasks).
-
-This is further described in the free course: MoodleBites for TechPrep
-https://www.moodlebites.com/enrol/index.php?id=228
+Xampp is a workable development environment.  Install the basic Xampp rather than the Moodle/Xampp package.  Install Moodle under htdocs and change the existing index file if desired.
 
 This article is helpful for installing xdebug on xampp:
 https://gist.github.com/odan/1abe76d373a9cbb15bed

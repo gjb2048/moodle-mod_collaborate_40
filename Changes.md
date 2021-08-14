@@ -6,7 +6,8 @@ V3.11.1.0
 1. Moodle 3.11 version.
 2. Added downgrade_me.php script - helps with development.
 3. Improved logit debugging method to output a stack trace, helps to identify higher up callers.
-4. Tidied code.
+4. Improved logit debugging method to use the PHP error log instead.
+5. Tidied code.
 
 1.1 - 27/08/20 - MINOR change to rendering
 ------------------------------------------

@@ -30,19 +30,12 @@ defined('MOODLE_INTERNAL') || die();
 
 class debugging {
     public static function logit($message, $value) {
-
-        $file = fopen('mylog.log', 'a');
-
-        if ($file) {
-            fwrite($file, print_r($message, true));
-            fwrite($file, print_r($value, true));
-            fwrite($file, "\n");
-            try {
-                throw new \Exception();
-            } catch(\Exception $e) {
-                fwrite($file, 'Trace: '.$e->getTraceAsString());
-            }
-            fclose($file);
+        error_log(print_r($message, true));
+        error_log(print_r($value, true));
+        try {
+            throw new \Exception();
+        } catch(\Exception $e) {
+            error_log('Trace: '.$e->getTraceAsString().PHP_EOL);
         }
     }
 }

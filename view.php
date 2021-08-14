@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Prints a particular instance of simplemod
+ * Prints a particular instance of simplemod.
  *
  * @package    mod_simplemod
  * @copyright  2019 Richard Jones richardnz@outlook.com
