@@ -39,6 +39,5 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool
  */
 function xmldb_simplemod_upgrade($oldversion) {
-
     return true;
 }

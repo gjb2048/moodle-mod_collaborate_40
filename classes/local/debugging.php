@@ -17,8 +17,10 @@
 /**
  * Simple debugging class
  *
- * @package    mod_simplemod
+ * @package    mod_simplemod.
  * @copyright  2019 Richard Jones richardnz@outlook.com
+ * @copyright  2021 G J Barnard.
+ * @author     G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,6 +37,11 @@ class debugging {
             fwrite($file, print_r($message, true));
             fwrite($file, print_r($value, true));
             fwrite($file, "\n");
+            try {
+                throw new \Exception();
+            } catch(\Exception $e) {
+                fwrite($file, 'Trace: '.$e->getTraceAsString());
+            }
             fclose($file);
         }
     }

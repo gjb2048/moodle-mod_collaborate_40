@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define all the restore steps that will be used by the restore_simplemod_activity_task
+ * Define all the restore steps that will be used by the restore_simplemod_activity_task.
  *
  * @package   mod_simplemod
  * @category  backup

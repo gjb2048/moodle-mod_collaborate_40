@@ -2,9 +2,9 @@ A template for Moodle modules.  Updated from Moodle HQ's moodle-mod_simplemod te
 
 Added:
 
- - Mustache template
- - Working backup/restore functionality for Moodle2
- - No grades or events implemented
+ - Mustache template.
+ - Working backup/restore functionality for Moodle2.
+ - No grades or events implemented.
 
 Instructions for installing:
 ============================
@@ -13,11 +13,43 @@ Download the zip file or clone the repository into your moodle/mod folder using 
 
 Assuming you are going to change your module name from simplemod to something more relevant, do the following.
 
+Windows extra
+===========================
+
+Line endings
+------------
+
+If on Windows then ensure the line endings are correct before starting by opening 'Git Bash' in the root of the module and typing:
+
+<pre>
+find . -type f -print0 | xargs -0 unix2dos
+</pre>
+
+PHP log file
+------------
+
+Edit the php.ini file and specify the location of the error log, this will help with debugging as the file can contain extra information:
+
+<pre>
+; Log errors to specified file. PHP's default behavior is to leave this value
+; empty.
+; http://php.net/error-log
+; Example:
+;error_log = php_errors.log
+; Log errors to syslog (Event Log on Windows).
+;error_log = syslog
+error_log = "f:/WAMP/php74tsx64/php.log"
+</pre>
+
+Where 'f:/WAMP/php74tsx64/php.log' is an example location.  Restart the web server service to take effect, i.e. 'Apache2.4' in 'Services'.
+
+
 Rename these files:
 ===================
-All 4 files in backup/moodle2 should have the name of your new module.
+All four files in backup/moodle2 should have the name of your new module.
 
 The lang/en/simplemod.php file should be renamed to the name of your new module.
+
 
 Replace simplemod with your new module name
 ========================================
@@ -43,6 +75,11 @@ class debugging {
             fwrite($file, print_r($message, true));
             fwrite($file, print_r($value, true));
             fwrite($file, "\n");
+            try {
+                throw new \Exception();
+            } catch(\Exception $e) {
+                fwrite($file, 'Trace: '.$e->getTraceAsString());
+            }
             fclose($file);
         }
     }
@@ -53,7 +90,7 @@ Place the above code in a file called debugging.php.
 
 Modify the file location (mylog.log) if desired.  Anywhere you want to view the contents of an object use:
 <pre>
-\mod_simplemod\local\debugging::logit("What is in a widegt: ", $simplemod);
+\mod_simplemod\local\debugging::logit("What is in a widget: ", $simplemod);
 </pre>
 
 Using Xdebug
@@ -72,17 +109,9 @@ https://www.moodlebites.com/enrol/index.php?id=228
 This article is helpful for installing xdebug on xampp:
 https://gist.github.com/odan/1abe76d373a9cbb15bed
 
-Changes
-=======
-1.1 - 27/08/20 - MINOR change to rendering
-Put the renderer function code into classes/output/view.php
-Called the template by the same name and now use the core renderer to display the page content.
-Removed the renderer.php file.
-
 Further information
 ===================
-Have fun developing for Moodle.  This activity module is an
-example from MoodleBites for Developers level 2.
+Have fun developing for Moodle.  This activity module is an example from MoodleBites for Developers level 2.
 
 https://www.moodlebites.com/mod/page/view.php?id=19542
 

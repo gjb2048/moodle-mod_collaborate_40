@@ -19,32 +19,25 @@
  *
  * @package    mod_simplemod
  * @copyright  2019 Richard Jones richardnz@outlook.com
+ * @copyright  2021 G J Barnard.
+ * @author     G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @see https://github.com/moodlehq/moodle-mod_simplemod
- * @see https://github.com/justinhunt/moodle-mod_simplemod */
+ * @see https://github.com/justinhunt/moodle-mod_simplemod
+ * @see https://github.com/richardjonesnz/moodle-mod_simplemod
+ * @see https://github.com/gjb2048/moodle-mod_simplemod
+ */
 
 use mod_simplemod\output\view;
 require_once('../../config.php');
 
-// We need the course module id (id) or
-// the simplemod instance id (n).
+// We need the course module id (id).
 $id = optional_param('id', 0, PARAM_INT);
-$n  = optional_param('n', 0, PARAM_INT);
 
 if ($id) {
-    $cm = get_coursemodule_from_id('simplemod', $id, 0, false,
-            MUST_EXIST);
-    $course = $DB->get_record('course',
-            array('id' => $cm->course), '*', MUST_EXIST);
-    $simplemod = $DB->get_record('simplemod',
-            array('id' => $cm->instance), '*', MUST_EXIST);
-} else if ($n) {
-    $simplemod = $DB->get_record('simplemod', array('id' => $n), '*',
-            MUST_EXIST);
-    $course = $DB->get_record('course',
-            array('id' => $simplemod->course), '*', MUST_EXIST);
-    $cm = get_coursemodule_from_instance('simplemod', $simplemod->id,
-            $course->id, false, MUST_EXIST);
+    $cm = get_coursemodule_from_id('simplemod', $id, 0, false, MUST_EXIST);
+    $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+    $simplemod = $DB->get_record('simplemod', array('id' => $cm->instance), '*', MUST_EXIST);
 }
 
 // Print the page header.

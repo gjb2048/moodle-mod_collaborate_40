@@ -26,8 +26,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->dirroot . '/mod/simplemod/backup/moodle2/backup_simplemod_stepslib.php');
-require_once($CFG->dirroot . '/mod/simplemod/backup/moodle2/backup_simplemod_settingslib.php');
+require_once($CFG->dirroot.'/mod/simplemod/backup/moodle2/backup_simplemod_stepslib.php');
+require_once($CFG->dirroot.'/mod/simplemod/backup/moodle2/backup_simplemod_settingslib.php');
+
 /**
  * Provides the steps to perform one complete backup of the simplemod instance
  *
@@ -46,17 +47,17 @@ class backup_simplemod_activity_task extends backup_activity_task {
     }
 
     /**
-     * Defines a backup step to store the instance data in the simplemod.xml file
+     * Defines a backup step to store the instance data in the simplemod.xml file.
      */
     protected function define_my_steps() {
         $this->add_step(new backup_simplemod_activity_structure_step('simplemod_structure', 'simplemod.xml'));
     }
 
     /**
-     * Encodes URLs to the index.php and view.php scripts
+     * Encodes URLs to the index.php and view.php scripts.
      *
-     * @param string $content some HTML text that eventually contains URLs to the activity instance scripts
-     * @return string the content with the URLs encoded
+     * @param string $content some HTML text that eventually contains URLs to the activity instance scripts.
+     * @return string the content with the URLs encoded.
      */
     static public function encode_content_links($content) {
         global $CFG;

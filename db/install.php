@@ -28,7 +28,7 @@
  */
 
 /**
- * Post installation procedure
+ * Post installation procedure.
  *
  * @see upgrade_plugins_modules()
  */
@@ -36,7 +36,7 @@ function xmldb_simplemod_install() {
 }
 
 /**
- * Post installation recovery procedure
+ * Post installation recovery procedure.
  *
  * @see upgrade_plugins_modules()
  */

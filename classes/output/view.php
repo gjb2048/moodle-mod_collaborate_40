@@ -45,15 +45,15 @@ class view implements renderable, templatable {
     protected $id;
 
     public function __construct($simplemod, $id) {
-
         $this->simplemod = $simplemod;
         $this->id = $id;
     }
+
     /**
      * Export this data so it can be used as the context for a mustache template.
      *
-     * @param renderer_base $output
-     * @return stdClass
+     * @param renderer_base $output.
+     * @return stdClass.
      */
     public function export_for_template(renderer_base $output) {
 
@@ -61,8 +61,7 @@ class view implements renderable, templatable {
 
         $data->title = $this->simplemod->title;
         // Moodle handles processing of std intro field.
-        $data->body = format_module_intro('simplemod',
-                $this->simplemod, $this->id);
+        $data->body = format_module_intro('simplemod', $this->simplemod, $this->id);
 
         return $data;
     }

@@ -27,10 +27,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/mod/simplemod/backup/moodle2/restore_simplemod_stepslib.php');
+require_once($CFG->dirroot.'/mod/simplemod/backup/moodle2/restore_simplemod_stepslib.php');
 
 /**
- * Restore task for the simplemod activity module
+ * Restore task for the simplemod activity module.
  *
  * Provides all the settings and steps to perform complete restore of the activity.
  *

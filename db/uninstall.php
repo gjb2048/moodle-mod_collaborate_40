@@ -26,7 +26,7 @@
  * @see https://github.com/justinhunt/moodle-mod_simplemod*/
 
 /**
- * Custom uninstallation procedure
+ * Custom uninstallation procedure.
  */
 function xmldb_simplemod_uninstall() {
     return true;

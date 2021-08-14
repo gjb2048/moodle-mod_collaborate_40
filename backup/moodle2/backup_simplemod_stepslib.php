@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 /**
- * Define the complete simplemod structure for backup, with file and id annotations
+ * Define the complete simplemod structure for backup, with file and id annotations.
  *
  * @package   mod_simplemod
  * @category  backup
@@ -49,17 +49,21 @@ class backup_simplemod_activity_structure_step extends backup_activity_structure
 
         // Define the root element describing the simplemod instance.
         $simplemod = new backup_nested_element('simplemod',
-                array('id'), array('course', 'name', 'intro',
+            array('id'), 
+            array(
+                'course', 'name', 'intro',
                 'introformat', 'title', 'timecreated',
-                'timemodified'));
+                'timemodified'
+            )
+        );
 
         // If we had more elements, we would build the tree here.
 
         // Define data sources.
         $simplemod->set_source_table('simplemod', array('id' => backup::VAR_ACTIVITYID));
 
-        // If we were referring to other tables, we would annotate the relation
-        // with the element's annotate_ids() method.
+        /* If we were referring to other tables, we would annotate the relation
+           with the element's annotate_ids() method. */
 
         // Define file annotations (we do not use itemid in this example).
         $simplemod->annotate_files('mod_simplemod', 'intro', null);
