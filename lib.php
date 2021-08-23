@@ -303,10 +303,9 @@ function simplemod_scale_used_anywhere($scaleid) {
  * Needed by {@link grade_update_mod_grades()}.
  *
  * @param stdClass $simplemod instance object with extra cmidnumber and modname property
- * @param bool $reset reset grades in the gradebook
  * @return void
  */
-function simplemod_grade_item_update(stdClass $simplemod, $reset=false) {
+function simplemod_grade_item_update(stdClass $simplemod) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
     $item = array();
@@ -322,11 +321,9 @@ function simplemod_grade_item_update(stdClass $simplemod, $reset=false) {
     } else {
         $item['gradetype'] = GRADE_TYPE_NONE;
     }
-    if ($reset) {
-        $item['reset'] = true;
-    }
+
     grade_update('mod/simplemod', $simplemod->course, 'mod', 'simplemod',
-            $simplemod->id, 0, null, $item);
+        $simplemod->id, 0, null, $item);
 }
 /**
  * Delete grade item for given simplemod instance
