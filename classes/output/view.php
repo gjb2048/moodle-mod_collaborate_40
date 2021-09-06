@@ -34,7 +34,7 @@ use stdClass;
 /**
  * Simplemod: Create a new view page renderable object
  *
- * @param object simnplemod - instance of simplemod.
+ * @param object simplemod - instance of simplemod.
  * @param int id - course module id.
  * @copyright  2020 Richard Jones <richardnz@outlook.com>
  */
