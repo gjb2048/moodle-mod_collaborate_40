@@ -41,7 +41,7 @@ $string['simplemodname'] = 'Name';
 $string['simplemodname_help'] = 'This is the content of the help tooltip associated with the simplemodname field.  Markdown syntax is supported.';
 $string['simplemod'] = 'Simplemod';
 $string['pluginadministration'] = 'Simplemod administration';
-$string['pluginname'] = 'simplemod';
+$string['pluginname'] = 'Simplemod';
 $string['nosimplemods'] = 'No instances';
 
 // Mod form specific simplemod settings.
