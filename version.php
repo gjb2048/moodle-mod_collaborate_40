@@ -19,8 +19,7 @@
  *
  * @package    mod_simplemod
  * @copyright  2019 Richard Jones richardnz@outlook.com
- * @copyright  2021 G J Barnard.
- * @author     G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}.
+ * @copyright  2021 G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @see https://github.com/moodlehq/moodle-mod_simplemod
  * @see https://github.com/justinhunt/moodle-mod_simplemod
