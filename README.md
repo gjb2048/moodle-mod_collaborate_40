@@ -72,7 +72,7 @@ You may notice a reference to a local class debugging.  This is a simple script 
 It looks like this"
 
 <pre>
-namespace mod_simplemod\local;
+namespace mod_collaborate\local;
 
 class debugging {
     public static function logit($message, $value) {

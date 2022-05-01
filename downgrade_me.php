@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Simplemod module.
+ * Collaborate module.
  *
- * @package    mod_simplemod
+ * @package    mod_collaborate
  * @copyright  &copy; 2021-onwards G J Barnard.
  * @author     G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
@@ -28,11 +28,11 @@ require_login();
 
 if (is_siteadmin()) {
     $plugin = new stdClass;
-    require_once($CFG->dirroot.'/mod/simplemod/version.php');
+    require_once($CFG->dirroot.'/mod/collaborate/version.php');
     set_config('allversionshash', '');
-    $currentconfigversion = get_config('mod_simplemod', 'version');
+    $currentconfigversion = get_config('mod_collaborate', 'version');
     $currentversionversion = $plugin->version;
     $newversion = $plugin->version - 1;
-    set_config('version', $newversion, 'mod_simplemod');
-    echo 'Simplemod module downgraded to version: '.$newversion.' from config version '.$currentconfigversion.', version.php version '.$currentversionversion.'.';
+    set_config('version', $newversion, 'mod_collaborate');
+    echo 'Collaborate module downgraded to version: '.$newversion.' from config version '.$currentconfigversion.', version.php version '.$currentversionversion.'.';
 }

@@ -16,12 +16,12 @@
 
 
 /**
- * English strings for simplemod
+ * English strings for collaborate
  *
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_simplemod
+ * @package    mod_collaborate
  * @copyright  2019 Richard Jones richardnz@outlook.com
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @see https://github.com/moodlehq/moodle-mod_simplemod
@@ -30,19 +30,19 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename'] = 'Simplemod';
-$string['modulenameplural'] = 'Simplemods';
-$string['modulename_help'] = 'Use the simplemod module for... | The simplemod module allows...';
-$string['simplemod:addinstance'] = 'Add a new Simplemod';
-$string['simplemod:submit'] = 'Submit Simplemod';
-$string['simplemod:view'] = 'View Simplemod';
-$string['simplemodfieldset'] = 'Custom example fieldset';
-$string['simplemodname'] = 'Name';
-$string['simplemodname_help'] = 'This is the content of the help tooltip associated with the simplemodname field.  Markdown syntax is supported.';
-$string['simplemod'] = 'Simplemod';
-$string['pluginadministration'] = 'Simplemod administration';
-$string['pluginname'] = 'Simplemod';
-$string['nosimplemods'] = 'No instances';
+$string['modulename'] = 'Collaborate';
+$string['modulenameplural'] = 'Collaborates';
+$string['modulename_help'] = 'Use the collaborate module for... | The collaborate module allows...';
+$string['collaborate:addinstance'] = 'Add a new Collaborate';
+$string['collaborate:submit'] = 'Submit Collaborate';
+$string['collaborate:view'] = 'View Collaborate';
+$string['collaboratefieldset'] = 'Custom example fieldset';
+$string['collaboratename'] = 'Name';
+$string['collaboratename_help'] = 'This is the content of the help tooltip associated with the collaboratename field.  Markdown syntax is supported.';
+$string['collaborate'] = 'Collaborate';
+$string['pluginadministration'] = 'Collaborate administration';
+$string['pluginname'] = 'Collaborate';
+$string['nocollaborates'] = 'No instances';
 
-// Mod form specific simplemod settings.
+// Mod form specific collaborate settings.
 $string['title'] = 'Activity title';
