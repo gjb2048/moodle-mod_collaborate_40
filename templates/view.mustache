@@ -29,16 +29,19 @@
     Context variables required for this template:
     * title String a page title.
     * body String of html code the formatted module intro.
+    * extra String extra.
 
     Example context (json):
     {
          "title": "My heading",
-         "body": "<p>My html body</p>"
+         "body": "<p>My html body</p>",
+         "extra": "Developer"
     }
 }}
 <div class="card">
     <div class="card-body">
         <h2 class="card-title">{{title}}</h2>
         {{{body}}}
+        <p>{{extra}}</p>
     </div>
 </div>

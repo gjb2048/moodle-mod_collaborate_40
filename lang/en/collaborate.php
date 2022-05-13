@@ -40,6 +40,7 @@ $string['collaboratefieldset'] = 'Custom example fieldset';
 $string['collaboratename'] = 'Name';
 $string['collaboratename_help'] = 'This is the content of the help tooltip associated with the collaboratename field.  Markdown syntax is supported.';
 $string['collaborate'] = 'Collaborate';
+$string['dev'] = 'I\'m a developer';
 $string['pluginadministration'] = 'Collaborate administration';
 $string['pluginname'] = 'Collaborate';
 $string['nocollaborates'] = 'No instances';
