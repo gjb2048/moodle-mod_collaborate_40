@@ -56,3 +56,12 @@ $string['pageviewed'] = 'Page viewed';
 // Mod form specific collaborate settings.
 $string['title'] = 'Activity Title: ';
 $string['texteditor'] = 'Instructions {$a}';
+
+// Week 3 Task 3.
+// User button labels.
+$string['studenta'] = 'Partner A';
+$string['studentb'] = 'Partner B';
+
+// Showpage
+$string['user'] = 'User: {$a}';
+$string['returnview'] = 'Main page';

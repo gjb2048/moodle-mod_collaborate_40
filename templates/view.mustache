@@ -30,12 +30,16 @@
     * title String a page title.
     * body String of html code the formatted module intro.
     * extra String extra.
+    * url_a String Student 'a' show page.
+    * url_b String Student 'b' show page.
 
     Example context (json):
     {
          "title": "My heading",
          "body": "<p>My html body</p>",
-         "extra": "Developer"
+         "extra": "Developer",
+         "url_a": "https://mymoodle/mod/collaborate/showpage.php?cid=2&page=a",
+         "url_b": "https://mymoodle/mod/collaborate/showpage.php?cid=2&page=b"
     }
 }}
 <div class="card">
@@ -43,5 +47,9 @@
         <h2 class="card-title">{{title}}</h2>
         {{{body}}}
         <p>{{extra}}</p>
+        <div class="container">
+            <a href="{{url_a}}" class="btn btn-primary">{{# str }} studenta, mod_collaborate {{/ str }}</a>
+            <a href="{{url_b}}" class="btn btn-primary">{{# str }} studentb, mod_collaborate {{/ str }}</a>
+        </div>
     </div>
 </div>
