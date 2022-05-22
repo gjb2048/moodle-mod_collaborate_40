@@ -425,6 +425,14 @@ function collaborate_pluginfile($course, $cm, $context, $filearea, array $args, 
 
     require_login($course, true, $cm);
 
+    $fs = get_file_storage();
+    $relativepath = implode('/', $args);
+    $fullpath = "/$context->id/mod_collaborate/$filearea/$relativepath";
+    if ($file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
+        // Send the file.
+        send_stored_file($file, 0, 0, $forcedownload, $options);
+    }
+
     send_file_not_found();
 }
 
