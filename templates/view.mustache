@@ -39,9 +39,28 @@
          "body": "<p>My html body</p>",
          "extra": "Developer",
          "url_a": "https://mymoodle/mod/collaborate/showpage.php?cid=2&page=a",
-         "url_b": "https://mymoodle/mod/collaborate/showpage.php?cid=2&page=b"
+         "url_b": "https://mymoodle/mod/collaborate/showpage.php?cid=2&page=b",
+         "reports": true,
+         "url_view": "https://mymoodle/mod/collaborate/view.php?id=808",
+         "url_reports": "https://mymoodle/mod/collaborate/reports.php?cid=2"
     }
 }}
+{{#reports}}
+<div class = "container">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" href="{{url_view}}">
+            {{# str }} viewtab, mod_collaborate {{/ str }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_reports}}">
+            {{# str }} reportstab, mod_collaborate {{/ str }}
+        </a>
+    </li>
+  </ul>
+</div>
+{{/reports}}
 <div class="card">
     <div class="card-body">
         <h2 class="card-title">{{title}}</h2>
