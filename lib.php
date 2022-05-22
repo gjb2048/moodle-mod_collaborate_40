@@ -32,6 +32,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+use mod_collaborate\local\collaborate_editor;
+
 /* Moodle core API */
 
 /**
@@ -73,12 +75,16 @@ function collaborate_supports($feature) {
  * @return int The id of the newly inserted collaborate record
  */
 function collaborate_add_instance(stdClass $collaborate, mod_collaborate_mod_form $mform = null) {
-    global $DB;
 
     $collaborate->timecreated = time();
-    $collaborate->id = $DB->insert_record('collaborate', $collaborate);
 
-    return $collaborate->id;
+    // Add new instance with dummy data for the editor fields.
+    $collaborate->instructionsa ='a';
+    $collaborate->instructionsaformat = FORMAT_HTML;
+    $collaborate->instructionsb ='b';
+    $collaborate->instructionsbformat = FORMAT_HTML;
+
+    return collaborate_editor::update_editor_instance_helper($collaborate, $mform, true);
 }
 
 /**
@@ -93,14 +99,11 @@ function collaborate_add_instance(stdClass $collaborate, mod_collaborate_mod_for
  * @return boolean Success/Fail
  */
 function collaborate_update_instance(stdClass $collaborate, mod_collaborate_mod_form $mform = null) {
-    global $DB;
 
     $collaborate->timemodified = time();
     $collaborate->id = $collaborate->instance;
 
-    $result = $DB->update_record('collaborate', $collaborate);
-
-    return $result;
+    return collaborate_editor::update_editor_instance_helper($collaborate, $mform);
 }
 
 /**
@@ -172,10 +175,10 @@ function collaborate_delete_instance($id) {
  * @return stdClass|null
  */
 function collaborate_user_outline($course, $user, $mod, $collaborate) {
+
     $return = new stdClass();
     $return->time = 0;
     $return->info = '';
-
     return $return;
 }
 
@@ -305,9 +308,10 @@ function collaborate_scale_used_anywhere($scaleid) {
  * Needed by {@link grade_update_mod_grades()}.
  *
  * @param stdClass $collaborate instance object with extra cmidnumber and modname property
+ * @param bool $reset reset grades in the gradebook
  * @return void
  */
-function collaborate_grade_item_update(stdClass $collaborate) {
+function collaborate_grade_item_update(stdClass $collaborate, $reset=false) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
     $item = array();
@@ -323,9 +327,11 @@ function collaborate_grade_item_update(stdClass $collaborate) {
     } else {
         $item['gradetype'] = GRADE_TYPE_NONE;
     }
-
+    if ($reset) {
+        $item['reset'] = true;
+    }
     grade_update('mod/collaborate', $collaborate->course, 'mod', 'collaborate',
-        $collaborate->id, 0, null, $item);
+            $collaborate->id, 0, null, $item);
 }
 /**
  * Delete grade item for given collaborate instance
@@ -337,7 +343,7 @@ function collaborate_grade_item_delete($collaborate) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
     return grade_update('mod/collaborate', $collaborate->course, 'mod', 'collaborate',
-        $collaborate->id, 0, null, array('deleted' => 1));
+            $collaborate->id, 0, null, array('deleted' => 1));
 }
 /**
  * Update collaborate grades in the gradebook
@@ -369,7 +375,10 @@ function collaborate_update_grades(stdClass $collaborate, $userid = 0) {
  * @return array of [(string)filearea] => (string)description
  */
 function collaborate_get_file_areas($course, $cm, $context) {
-    return array();
+    return [
+        'instructionsa' => 'Instructions for partner A',
+        'instructionsb' => 'Instructions for partner B'
+    ];
 }
 
 /**
