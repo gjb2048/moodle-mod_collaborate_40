@@ -377,7 +377,8 @@ function collaborate_update_grades(stdClass $collaborate, $userid = 0) {
 function collaborate_get_file_areas($course, $cm, $context) {
     return [
         'instructionsa' => 'Instructions for partner A',
-        'instructionsb' => 'Instructions for partner B'
+        'instructionsb' => 'Instructions for partner B',
+        'submission' => 'Student submissions'
     ];
 }
 

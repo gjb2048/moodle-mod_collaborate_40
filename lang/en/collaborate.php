@@ -72,3 +72,8 @@ $string['enablereports'] = 'Enable reports';
 $string['enablereports_desc'] = 'Enable the reports to be viewed by teachers.';
 $string['reportstab'] = 'Reports';
 $string['viewtab'] = 'View';
+
+// Week 5 Task 3.
+$string['submission'] = 'Your submission';
+$string['submissionsave'] = 'Save submission';
+$string['submissionupdated'] = 'Submission updated';
