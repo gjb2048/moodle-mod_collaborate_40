@@ -51,3 +51,8 @@ $string['title_help'] = 'Please enter a suitable title for your collaborate main
 
 // Week 2 Task 1.
 $string['pageviewed'] = 'Page viewed';
+
+// Week 3 Task 1.
+// Mod form specific collaborate settings.
+$string['title'] = 'Activity Title: ';
+$string['texteditor'] = 'Instructions {$a}';

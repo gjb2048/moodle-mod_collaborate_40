@@ -30,6 +30,8 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
 
+use mod_collaborate\local\collaborate_editor;
+
 /**
  * Module instance settings form
  *
@@ -68,6 +70,12 @@ class mod_collaborate_mod_form extends moodleform_mod {
         $mform->addElement('text', 'title', get_string('title', 'mod_collaborate'));
         $mform->setType('title', PARAM_TEXT);
         $mform->addHelpButton('title', 'title', 'collaborate');
+
+        // Add two editors for partner instructions.
+        $names = collaborate_editor::get_editor_names();
+        foreach($names as $name) {
+            collaborate_editor::add_editor($mform, $this->context, $name);
+        }
 
         // Add standard grading elements.
         $this->standard_grading_coursemodule_elements();
