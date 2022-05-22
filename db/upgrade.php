@@ -67,5 +67,20 @@ function xmldb_collaborate_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2022050104, 'collaborate');
     }
 
+    if ($oldversion < 2022050105) {
+
+        // Define field grade to be added to collaborate_submissions.
+        $table = new xmldb_table('collaborate_submissions');
+        $field = new xmldb_field('grade', XMLDB_TYPE_INTEGER, '10', null, null, null, null, 'timemodified');
+
+        // Conditionally launch add field grade.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        // Collaborate savepoint reached.
+        upgrade_mod_savepoint(true, 2022050105, 'collaborate');
+    }
+
     return true;
 }
