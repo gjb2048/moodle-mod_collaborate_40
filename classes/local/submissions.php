@@ -88,4 +88,39 @@ class submissions {
         global $DB;
         return $DB->get_record('collaborate_submissions', ['collaborateid' => $cid, 'userid' => $userid, 'page' => $page], '*', IGNORE_MISSING);
     }
+
+    /**
+     * Retrieve a submission record for grading.
+     *
+     * @param object $collaborate Our collaborate instance.
+     * @param int $sid The submission id.
+     * @return object $data The data required for the grading form.
+     */
+    public static function get_submission_to_grade($collaborate, $sid) {
+        global $DB;
+
+        $record = $DB->get_record('collaborate_submissions', ['id' => $sid], '*', MUST_EXIST);
+        $data = new \stdClass();
+        $data->title = $collaborate->title;
+        $data->submission = $record->submission;
+
+        $user = $DB->get_record('user', ['id' => $record->userid], '*', MUST_EXIST);
+        $data->name = $user->firstname.' '.$user->lastname;
+        $data->grade = (is_null($record->grade)) ? '-' : $record->grade;  // So that '-' is shown when first not graded.
+
+        return $data;
+    }
+
+    /**
+     * Update a submission grade.
+     *
+     * @param int $sid The submission id.
+     * @param int $grade The submission grade.
+     * @return none.
+     */
+
+    public static function update_grade($sid, $grade) {
+        global $DB;
+        $DB->set_field('collaborate_submissions', 'grade', $grade, ['id' => $sid]);
+    }
 }

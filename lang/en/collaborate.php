@@ -81,3 +81,10 @@ $string['submissionupdated'] = 'Submission updated';
 // Reports - Week 6 Task 1.
 $string['id'] = 'Id';
 $string['reporttitle'] = 'Title';
+
+// Reports - Week 6 Task 2.
+$string['allocategrade'] = 'Allocate grade';
+$string['collaborate:gradesubmission'] = 'Grade submission';
+$string['currentgrade'] = 'Current grade: ';
+$string['submissiongraded'] = 'Submission graded';
+$string['gradingheader'] = 'Grade a submission';
