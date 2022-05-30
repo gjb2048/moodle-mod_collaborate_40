@@ -33,7 +33,7 @@ class grading_form extends \moodleform {
 
         // Grades available.
         $grades = array();
-        for ($m = 0; $m <= 100; $m++) {
+        for ($m = 0; $m <= $this->_customdata['maxgrade']; $m++) {
             $grades[$m] = $m;
         }
         $mform->addElement('select', 'grade', get_string('allocategrade', 'mod_collaborate'), $grades);
