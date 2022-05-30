@@ -31,14 +31,12 @@
 use mod_collaborate\output\view;
 require_once('../../config.php');
 
-// We need the course module id (id).
-$id = optional_param('id', 0, PARAM_INT);
+// We need the Collaborate instance id.
+$id = required_param('id', PARAM_INT);
 
-if ($id) {
-    $cm = get_coursemodule_from_id('collaborate', $id, 0, false, MUST_EXIST);
-    $course = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-    $collaborate = $DB->get_record('collaborate', array('id' => $cm->instance), '*', MUST_EXIST);
-}
+$cm = get_coursemodule_from_id('collaborate', $id, 0, false, MUST_EXIST);
+$course = $DB->get_record('course', ['id' => $cm->course], '*', MUST_EXIST);
+$collaborate = $DB->get_record('collaborate', ['id' => $cm->instance], '*', MUST_EXIST);
 
 // Print the page header.
 $PAGE->set_url('/mod/collaborate/view.php', array('id' => $cm->id));
@@ -54,7 +52,10 @@ $completion = new completion_info($course);
 $completion->set_module_viewed($cm);
 
 // Let's add the module viewed event.
-$event = \mod_collaborate\event\page_viewed::create(['context' => $PAGE->context, 'objectid' => $id]);
+$event = \mod_collaborate\event\page_viewed::create(['context' => $PAGE->context, 'objectid' => $collaborate->id]);
+$event->add_record_snapshot('course_modules', $cm);
+$event->add_record_snapshot('course', $PAGE->course);
+$event->add_record_snapshot($PAGE->cm->modname, $collaborate);
 $event->trigger();
 
 // Check for intro page content.

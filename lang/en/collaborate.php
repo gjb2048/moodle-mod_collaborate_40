@@ -100,3 +100,7 @@ $string['exportall'] = 'Export all';
 
 // Tasks - Week 7 Task 2.
 $string['namechanged'] = 'Collaborate \'{$a->id}\'s name has changed to \'{$a->name}\'.';
+
+// Events - Week 7 Task 3.
+$string['submission_submitted'] = 'Submission submitted';
+$string['submission_graded'] = 'Submission graded';
