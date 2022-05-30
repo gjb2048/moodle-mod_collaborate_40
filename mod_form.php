@@ -73,7 +73,7 @@ class mod_collaborate_mod_form extends moodleform_mod {
 
         // Add two editors for partner instructions.
         $names = collaborate_editor::get_editor_names();
-        foreach($names as $name) {
+        foreach ($names as $name) {
             collaborate_editor::add_editor($mform, $this->context, $name);
         }
 
@@ -87,8 +87,12 @@ class mod_collaborate_mod_form extends moodleform_mod {
         $this->add_action_buttons();
     }
 
-    // Standard Moodle function for editor area preprocessing.
-    function data_preprocessing(&$default_values) {
+    /**
+     * Standard Moodle function for editor area preprocessing.
+     *
+     * @param array $defaultvalues The default values.
+     */
+    public function data_preprocessing(&$defaultvalues) {
 
         if ($this->current->instance) {
             $context = $this->context;
@@ -96,15 +100,15 @@ class mod_collaborate_mod_form extends moodleform_mod {
             $names = collaborate_editor::get_editor_names();
 
             foreach ($names as $name) {
-                $default_values = (object) $default_values;
-                $default_values = file_prepare_standard_editor(
-                    $default_values,
+                $defaultvalues = (object) $defaultvalues;
+                $defaultvalues = file_prepare_standard_editor(
+                    $defaultvalues,
                     $name,
                     $options,
                     $context,
                     'mod_collaborate',
                     $name,
-                    $default_values->id
+                    $defaultvalues->id
                 );
             }
         }

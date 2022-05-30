@@ -32,7 +32,7 @@ use \mod_collaborate\output\namechanger;
 require_once('../../config.php');
 
 // Fetch URL parameters.
-$courseid = required_param('courseid', PARAM_INT);   // course.
+$courseid = required_param('courseid', PARAM_INT); // Course.
 $action = optional_param('action', 'list', PARAM_TEXT);
 $actionitem = optional_param('actionitem', 0, PARAM_INT);
 
@@ -77,7 +77,7 @@ if ($action == "edit") {
     $data->courseid = $courseid;
     $collaborate = $DB->get_record('collaborate', ['id' => $actionitem]);
     if (!$collaborate) {
-        redirect($PAGE->url,'nodata', 2);
+        redirect($PAGE->url, 'nodata', 2);
     }
     $data->id = $collaborate->id;
     $data->name = $collaborate->name;

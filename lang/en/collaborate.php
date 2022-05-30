@@ -63,7 +63,7 @@ $string['texteditor'] = 'Instructions {$a}';
 $string['studenta'] = 'Partner A';
 $string['studentb'] = 'Partner B';
 
-// Showpage
+// Showpage.
 $string['user'] = 'User: {$a}';
 $string['returnview'] = 'Main page';
 

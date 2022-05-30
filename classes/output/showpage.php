@@ -78,7 +78,7 @@ class showpage implements renderable, templatable {
         // Get the content from the database.
         $content = ($this->page == 'a') ? $this->collaborate->instructionsa : $this->collaborate->instructionsb;
 
-        $filearea = 'instructions'.$this->page; 
+        $filearea = 'instructions'.$this->page;
         $context = \context_module::instance($this->cm->id);
         $content = file_rewrite_pluginfile_urls($content, 'pluginfile.php', $context->id,
             'mod_collaborate', $filearea, $this->collaborate->id);

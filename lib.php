@@ -79,9 +79,9 @@ function collaborate_add_instance(stdClass $collaborate, mod_collaborate_mod_for
     $collaborate->timecreated = time();
 
     // Add new instance with dummy data for the editor fields.
-    $collaborate->instructionsa ='a';
+    $collaborate->instructionsa = 'a';
     $collaborate->instructionsaformat = FORMAT_HTML;
-    $collaborate->instructionsb ='b';
+    $collaborate->instructionsb = 'b';
     $collaborate->instructionsbformat = FORMAT_HTML;
 
     // Update gradebook.
@@ -136,10 +136,10 @@ function collaborate_refresh_events($courseid = 0) {
         }
     }
 
-    foreach ($collaborates as $collaborate) {
-        // Create a function such as the one below to deal with updating calendar events.
-        // collaborate_update_events($collaborate);
-    }
+    // Create a function such as the one below to deal with updating calendar events.
+    /*foreach ($collaborates as $collaborate) {
+        collaborate_update_events($collaborate);
+    }*/
 
     return true;
 }
@@ -375,11 +375,11 @@ function collaborate_update_grades(stdClass $collaborate, $userid = 0) {
     // Do we have grades?
     if ($grades) {
         collaborate_grade_item_update($collaborate, $grades);
-    } elseif ($userid) {
+    } else if ($userid) {
         // Single user specified, create initial grade item.
         $grade = new stdClass();
         $grade->userid = $userid;
-        $grade->rawgrade = NULL;
+        $grade->rawgrade = null;
         collaborate_grade_item_update($collaborate, $grade);
     } else {
         collaborate_grade_item_update($collaborate);

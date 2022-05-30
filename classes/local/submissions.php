@@ -87,7 +87,12 @@ class submissions {
      */
     public static function get_submission($cid, $userid, $page) {
         global $DB;
-        return $DB->get_record('collaborate_submissions', ['collaborateid' => $cid, 'userid' => $userid, 'page' => $page], '*', IGNORE_MISSING);
+        return $DB->get_record(
+            'collaborate_submissions',
+            ['collaborateid' => $cid, 'userid' => $userid, 'page' => $page],
+            '*',
+            IGNORE_MISSING
+        );
     }
 
     /**
@@ -143,25 +148,25 @@ class submissions {
     }
 
     /**
-    *  Get the student submission records to be saved to a file.
-    *
-    * @param object $collaborate The Collaborate instance cotaining submissions.
-    * @param object $context The module context.
-    * @return array of objects $records The records to be exported.
-    */
+     * Get the student submission records to be saved to a file.
+     *
+     * @param object $collaborate The Collaborate instance cotaining submissions.
+     * @param object $context The module context.
+     * @return array of objects $records The records to be exported.
+     */
     public static function get_export_data($collaborate, $context) {
         global $DB;
 
-        $sql = "SELECT s.id, u.firstname, u.lastname, s.submission,  s.grade
-                    FROM {collaborate_submissions} AS s
-                    JOIN {collaborate} AS c ON s.collaborateid = c.id
-                    JOIN {user} AS u ON s.userid = u.id
+        $sql = "SELECT s.id, u.firstname, u.lastname, s.submission, s.grade
+                    FROM {collaborate_submissions} s
+                    JOIN {collaborate} c ON s.collaborateid = c.id
+                    JOIN {user} u ON s.userid = u.id
                     WHERE u.id <> 0
                         AND s.collaborateid = :cid";
 
         $records = $DB->get_records_sql($sql, ['cid' => $collaborate->id]);
 
-        // Process the submissions
+        // Process the submissions.
         foreach ($records as $record) {
             $content = file_rewrite_pluginfile_urls($record->submission, 'pluginfile.php',
                 $context->id, 'mod_collaborate', 'submission', $record->id);
@@ -178,10 +183,10 @@ class submissions {
     }
 
     /**
-    *  Get the column headers for the export file.
-    *
-    * @return String array.
-    */
+     * Get the column headers for the export file.
+     *
+     * @return String array.
+     */
     public static function get_export_headers() {
         return [
             get_string('id', 'mod_collaborate'),
@@ -193,19 +198,19 @@ class submissions {
     }
 
     /**
-    *  Export all submissions of all Collaborate instances.
-    *
-    * @return none.
-    */
+     *  Export all submissions of all Collaborate instances.
+     *
+     * @return none.
+     */
     public static function export_all_submissions() {
         global $CFG, $DB;
 
         // Get the all Collaborate instances.
         $sql = "SELECT s.id, u.firstname, u.lastname, s.submission,  s.grade,
                    c.id AS cid, c.course
-                FROM {collaborate_submissions} AS s
-                JOIN {collaborate} AS c ON s.collaborateid = c.id
-                JOIN {user} AS u ON s.userid = u.id
+                FROM {collaborate_submissions} s
+                JOIN {collaborate} c ON s.collaborateid = c.id
+                JOIN {user} u ON s.userid = u.id
                 WHERE u.id <> 0";
 
         $records = $DB->get_records_sql($sql);
@@ -230,7 +235,7 @@ class submissions {
 
             // Process media files (for printing).
             $content = \file_rewrite_pluginfile_urls($record->submission, 'pluginfile.php',
-                $context->id,'mod_collaborate', 'submission', $record->id);
+                $context->id, 'mod_collaborate', 'submission', $record->id);
 
             // Format submission.
             $formatoptions = new \stdClass;
@@ -245,8 +250,8 @@ class submissions {
 
         // Export the submissions to a pdf file.
         $fields = self::get_export_headers();
-        $download_submissions = new \ArrayObject($submissions);
-        $iterator = $download_submissions->getIterator();
+        $downloadsubmissions = new \ArrayObject($submissions);
+        $iterator = $downloadsubmissions->getIterator();
         $dataformat = 'pdf';
         $filename = clean_filename('export_submissions_'.time());
         $exportfile = dataformat::write_data($filename, $dataformat, $fields, $iterator);

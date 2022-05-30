@@ -54,7 +54,7 @@ class grading implements renderable, templatable {
      * @return stdClass
      */
     public function export_for_template(renderer_base $output) {
-        $this->submission->pageheader =  get_string('gradingheader', 'mod_collaborate');
+        $this->submission->pageheader = get_string('gradingheader', 'mod_collaborate');
 
         // Submission.
         $content = file_rewrite_pluginfile_urls($this->submission->submission, 'pluginfile.php',

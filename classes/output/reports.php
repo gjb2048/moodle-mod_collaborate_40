@@ -90,12 +90,12 @@ class reports implements renderable, templatable {
             $data = array();
             $data['id'] = $record->id;
             $data['title'] = $this->collaborate->title;
-            
-           // Format the submission to grab text only.
+
+            // Format the submission to grab text only.
             $submission = \format_string($record->submission);
             $submission = \strip_tags($submission);
             $data['submission'] = $submission;
-            
+
             // Could also have used SQL and a JOIN here.  Better for large tables, probably.
             $user = $DB->get_record('user', ['id' => $record->userid], '*', MUST_EXIST);
             $data['firstname'] = $user->firstname;
@@ -113,7 +113,7 @@ class reports implements renderable, templatable {
         return $submissions;
     }
 
-     /**
+    /**
      * Set the headers to match the record query and required report fields.
      *
      * @return string array of report column headers.
@@ -122,7 +122,7 @@ class reports implements renderable, templatable {
         return [
             get_string('id', 'mod_collaborate'),
             get_string('reporttitle', 'mod_collaborate'),
-            get_string('submission','mod_collaborate'),
+            get_string('submission', 'mod_collaborate'),
             get_string('firstname', 'core'),
             get_string('lastname', 'core'),
             get_string('grade', 'core_grades'),

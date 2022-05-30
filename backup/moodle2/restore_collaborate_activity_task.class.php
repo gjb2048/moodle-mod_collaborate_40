@@ -108,7 +108,7 @@ class restore_collaborate_activity_task extends restore_activity_task {
     public static function define_restore_log_rules_for_course() {
         $rules = array();
 
-        // Fix old wrong uses (missing extension)
+        // Fix old wrong uses (missing extension).
         $rules[] = new restore_log_rule('collaborate', 'view all', 'index?id={course}', null,
             null, null, 'index.php?id={course}');
         $rules[] = new restore_log_rule('collaborate', 'view all', 'index.php?id={course}', null);
