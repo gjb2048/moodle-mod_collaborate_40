@@ -566,3 +566,19 @@ function collaborate_extend_settings_navigation(settings_navigation $settingsnav
     $namechangeurl = new moodle_url('/mod/collaborate/namechanger.php', ['courseid' => $PAGE->course->id]);
     $collaboratenode->add(get_string('namechange', 'mod_collaborate'), $namechangeurl);
 }
+
+/**
+ * A task called from adhoc.
+ *
+ * @param progress_trace $trace object.
+ * @param $data - form data to update a database record.
+ */
+function collaborate_do_adhoc_task(progress_trace $trace, $data) {
+    global $DB;
+    $trace->output('Executing collaborate do adhoc task');
+    if ($DB->record_exists('collaborate', array('id' => $data->id))) {
+        $DB->update_record('collaborate', $data);
+        mtrace(get_string('namechanged', 'mod_collaborate', $data));
+        purge_other_caches();  // Purge the 'file and miscellaneous' cache so that our change(s) are seen.
+    }
+}

@@ -59,9 +59,12 @@ if ($mform->is_cancelled()) {
 
 // If we have data save it and return.
 if ($data = $mform->get_data()) {
-    $DB->update_record('collaborate', $data);
-    purge_other_caches();  // Purge the 'file and miscellaneous' cache so that our change(s) are seen.
-    redirect($PAGE->url, get_string('updated', 'core', $data->name), 2, notification::NOTIFY_SUCCESS);
+    // Replace update with call to ad_hoc task.
+    $updatetask = new \mod_collaborate\task\collaborate_adhoc();
+    $updatetask->set_custom_data($data);
+    \core\task\manager::queue_adhoc_task($updatetask);
+
+    redirect($PAGE->url, get_string('updated', 'core', $data->name), 2);
 }
 
 // Start output to browser.

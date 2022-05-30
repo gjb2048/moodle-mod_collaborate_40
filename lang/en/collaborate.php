@@ -97,3 +97,6 @@ $string['namechange'] = 'Change name';
 
 // Tasks - Week 7 Task 1.
 $string['exportall'] = 'Export all';
+
+// Tasks - Week 7 Task 2.
+$string['namechanged'] = 'Collaborate \'{$a->id}\'s name has changed to \'{$a->name}\'.';
