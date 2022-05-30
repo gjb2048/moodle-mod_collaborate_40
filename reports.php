@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>;.
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
  * Prints submission reports.
  *
@@ -22,6 +22,9 @@
  * @see https://github.com/moodlehq/moodle-mod_collaborate
  * @see https://github.com/justinhunt/moodle-mod_collaborate
  */
+
+use mod_collaborate\output\reports;
+use core\output\notification;
 
 require_once('../../config.php');
 
@@ -47,6 +50,14 @@ $PAGE->set_pagelayout('course');
 // Prevent direct acess to the url.
 require_capability('mod/collaborate:viewreportstab', $context);
 
-$OUTPUT->header();
-echo 'reports';
-$OUTPUT->footer();
+// Check the config.
+$config = get_config('mod_collaborate');
+if (!$config->enablereports) {
+    $returnurl = new moodle_url('/mod/collaborate/view.php', ['n' => $cid]);
+    redirect ($returnurl, get_string('nopermission', 'mod_collaborate'), null, notification::NOTIFY_ERROR);
+}
+
+echo $OUTPUT->header();
+// Create output object and render it using the template.
+echo $OUTPUT->render(new reports($collaborate, $cm->id));
+echo $OUTPUT->footer();

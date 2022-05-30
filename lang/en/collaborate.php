@@ -77,3 +77,7 @@ $string['viewtab'] = 'View';
 $string['submission'] = 'Your submission';
 $string['submissionsave'] = 'Save submission';
 $string['submissionupdated'] = 'Submission updated';
+
+// Reports - Week 6 Task 1.
+$string['id'] = 'Id';
+$string['reporttitle'] = 'Title';
