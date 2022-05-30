@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define all the backup steps that will be used by the backup_collaborate_activity_task
+ * Define all the backup steps that will be used by the backup_collaborate_activity_task.
  *
  * @package   mod_collaborate
  * @category  backup
@@ -38,7 +38,7 @@ defined('MOODLE_INTERNAL') || die;
 class backup_collaborate_activity_structure_step extends backup_activity_structure_step {
 
     /**
-     * Defines the backup structure of the module
+     * Defines the backup structure of the module.
      *
      * @return backup_nested_element
      */
@@ -49,24 +49,43 @@ class backup_collaborate_activity_structure_step extends backup_activity_structu
 
         // Define the root element describing the collaborate instance.
         $collaborate = new backup_nested_element('collaborate',
-            array('id'), 
+            array('id'),
             array(
                 'course', 'name', 'intro',
-                'introformat', 'title', 'timecreated',
-                'timemodified'
+                'introformat', 'title',
+                'instructionsa', 'instructionsaformat',
+                'instructionsb', 'instructionsbformat',
+                'timecreated', 'timemodified', 'grade'
             )
         );
 
-        // If we had more elements, we would build the tree here.
+        // Define the child element.
+        $submissions = new backup_nested_element('submissions');
+        $submission = new backup_nested_element('submission',
+            array('id'),
+            array(
+                'collaborateid', 'page', 'userid', 'submission', 'submissionformat',
+                'timecreated', 'timemodified', 'grade')
+        );
+
+        // Build the tree.
+        $collaborate->add_child($submissions);
+        $submissions->add_child($submission);
 
         // Define data sources.
         $collaborate->set_source_table('collaborate', array('id' => backup::VAR_ACTIVITYID));
 
-        /* If we were referring to other tables, we would annotate the relation
-           with the element's annotate_ids() method. */
+        // Backup submissions table if backing up user data.
+        if ($userinfo) {
+            $submission->set_source_table('collaborate_submissions',
+                array('collaborateid' => backup::VAR_PARENTID));
+        }
 
-        // Define file annotations (we do not use itemid in this example).
+        // Define file annotations. (For editor areas).
         $collaborate->annotate_files('mod_collaborate', 'intro', null);
+        $collaborate->annotate_files('mod_collaborate', 'instructionsa', null);
+        $collaborate->annotate_files('mod_collaborate', 'instructionsb', null);
+        $submission->annotate_files('mod_collaborate', 'submission', 'id');
 
         // Return the root element (collaborate), wrapped into standard activity structure.
         return $this->prepare_activity_structure($collaborate);

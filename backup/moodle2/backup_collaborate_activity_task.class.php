@@ -35,13 +35,13 @@ require_once($CFG->dirroot.'/mod/collaborate/backup/moodle2/backup_collaborate_s
  * @package   mod_collaborate
  * @category  backup
  * @copyright 2019 Richard Jones richardnz@outlook.com
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
  * @see https://github.com/moodlehq/moodle-mod_simplemod
  * @see https://github.com/justinhunt/moodle-mod_simplemod */
 class backup_collaborate_activity_task extends backup_activity_task {
 
     /**
-     * No specific settings for this activity
+     * No specific settings for this activity.
      */
     protected function define_my_settings() {
     }
@@ -56,10 +56,10 @@ class backup_collaborate_activity_task extends backup_activity_task {
     /**
      * Encodes URLs to the index.php and view.php scripts.
      *
-     * @param string $content some HTML text that eventually contains URLs to the activity instance scripts.
-     * @return string the content with the URLs encoded.
+     * @param string $content Some HTML text that eventually contains URLs to the activity instance scripts.
+     * @return string The content with the URLs encoded.
      */
-    static public function encode_content_links($content) {
+    public static function encode_content_links($content) {
         global $CFG;
 
         $base = preg_quote($CFG->wwwroot, '/');

@@ -26,17 +26,17 @@
  */
 
 /**
- * Structure step to restore one collaborate activity
+ * Structure step to restore one collaborate activity.
  *
  * @package   mod_collaborate
  * @category  backup
  * @copyright 2019 Richard Jones richardnz@outlook.com
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
  */
 class restore_collaborate_activity_structure_step extends restore_activity_structure_step {
 
     /**
-     * Defines structure of path elements to be processed during the restore
+     * Defines structure of path elements to be processed during the restore.
      *
      * @return array of {@link restore_path_element}
      */
@@ -45,14 +45,20 @@ class restore_collaborate_activity_structure_step extends restore_activity_struc
         $paths = array();
         $paths[] = new restore_path_element('collaborate', '/activity/collaborate');
 
+        $userinfo = $this->get_setting_value('userinfo');
+        if ($userinfo) {
+            $paths[] = new restore_path_element('collaborate_submissions',
+                '/activity/collaborate/submissions/submission');
+        }
+
         // Return the paths wrapped into standard activity structure.
         return $this->prepare_activity_structure($paths);
     }
 
     /**
-     * Process the given restore path element data
+     * Process the given restore path element data.
      *
-     * @param array $data parsed element data
+     * @param array $data parsed element data.
      */
     protected function process_collaborate($data) {
         global $DB;
@@ -75,10 +81,26 @@ class restore_collaborate_activity_structure_step extends restore_activity_struc
     }
 
     /**
-     * Post-execution actions
+     * Process the submission data.
+     */
+    protected function process_collaborate_submissions($data) {
+        global $DB;
+        $data = (object)$data;
+        $oldid = $data->id;
+        $data->collaborateid = $this->get_new_parentid('collaborate');
+
+        $newitemid = $DB->insert_record('collaborate_submissions', $data);
+        $this->set_mapping('collaborate_submission', $oldid, $newitemid, true);
+    }
+
+    /**
+     * Post-execution actions.
      */
     protected function after_execute() {
         // Add collaborate related files, no need to match by itemname (just internally handled context).
         $this->add_related_files('mod_collaborate', 'intro', null);
+        $this->add_related_files('mod_collaborate', 'instructionsa', 'collaborate');
+        $this->add_related_files('mod_collaborate', 'instructionsb', 'collaborate');
+        $this->add_related_files('mod_collaborate', 'submission', 'collaborate_submission');
     }
 }
