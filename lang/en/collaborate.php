@@ -88,3 +88,6 @@ $string['collaborate:gradesubmission'] = 'Grade submission';
 $string['currentgrade'] = 'Current grade: ';
 $string['submissiongraded'] = 'Submission graded';
 $string['gradingheader'] = 'Grade a submission';
+
+// Data export classes - Week 7.
+$string['exportlink'] = 'Export submissions to PDF';

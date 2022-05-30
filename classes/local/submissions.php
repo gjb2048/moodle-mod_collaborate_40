@@ -140,4 +140,54 @@ class submissions {
         }
         return $maxscore;
     }
+
+    /**
+    *  Get the student submission records to be saved to a file.
+    *
+    * @param object $collaborate The Collaborate instance cotaining submissions.
+    * @param object $context The module context.
+    * @return array of objects $records The records to be exported.
+    */
+    public static function get_export_data($collaborate, $context) {
+        global $DB;
+
+        $sql = "SELECT s.id, u.firstname, u.lastname, s.submission,  s.grade
+                    FROM {collaborate_submissions} AS s
+                    JOIN {collaborate} AS c ON s.collaborateid = c.id
+                    JOIN {user} AS u ON s.userid = u.id
+                    WHERE u.id <> 0
+                        AND s.collaborateid = :cid";
+
+        $records = $DB->get_records_sql($sql, ['cid' => $collaborate->id]);
+
+        // Process the submissions
+        foreach ($records as $record) {
+            $content = file_rewrite_pluginfile_urls($record->submission, 'pluginfile.php',
+                $context->id, 'mod_collaborate', 'submission', $record->id);
+
+            // Format submission.
+            $formatoptions = new \stdClass;
+            $formatoptions->noclean = true;
+            $formatoptions->overflowdiv = true;
+            $formatoptions->context = $context;
+
+            $record->submission = format_text($content, FORMAT_HTML, $formatoptions);
+        }
+        return $records;
+    }
+
+    /**
+    *  Get the column headers for the export file.
+    *
+    * @return String array.
+    */
+    public static function get_export_headers() {
+        return [
+            get_string('id', 'mod_collaborate'),
+            get_string('firstname', 'core'),
+            get_string('lastname', 'core'),
+            get_string('submission', 'mod_collaborate'),
+            get_string('grade', 'core_grades')
+        ];
+    }
 }
