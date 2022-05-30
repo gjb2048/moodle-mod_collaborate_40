@@ -556,9 +556,13 @@ function collaborate_extend_navigation(navigation_node $navref, stdClass $course
  * This function is called when the context for the page is a collaborate module. This is not called by AJAX
  * so it is safe to rely on the $PAGE.
  *
- * @param settings_navigation $settingsnav complete settings navigation tree
- * @param navigation_node $collaboratenode collaborate administration node
+ * @param settings_navigation $settingsnav Complete settings navigation tree.
+ * @param navigation_node $collaboratenode Collaborate administration node.
  */
-function collaborate_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $collaboratenode=null) {
-    // TODO Delete this function and its docblock, or implement it.
+function collaborate_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $collaboratenode = null) {
+    global $PAGE;
+
+    // Extend the settings nav with the namechanger page url.
+    $namechangeurl = new moodle_url('/mod/collaborate/namechanger.php', ['courseid' => $PAGE->course->id]);
+    $collaboratenode->add(get_string('namechange', 'mod_collaborate'), $namechangeurl);
 }

@@ -91,3 +91,6 @@ $string['gradingheader'] = 'Grade a submission';
 
 // Data export classes - Week 7.
 $string['exportlink'] = 'Export submissions to PDF';
+
+// Navigation and Name changer - Week 7.
+$string['namechange'] = 'Change name';
