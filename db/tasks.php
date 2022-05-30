@@ -15,23 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the version and other meta-info about the plugin
+ * This file keeps track of scheduled tasks.
  *
  * @package    mod_collaborate
  * @copyright  2019 Richard Jones richardnz@outlook.com
- * @copyright  2021 G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}.
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @see https://github.com/moodlehq/moodle-mod_simplemod
- * @see https://github.com/justinhunt/moodle-mod_simplemod
- * @see https://github.com/richardjonesnz/moodle-mod_simplemod
- * @see https://github.com/gjb2048/moodle-mod_simplemod
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
+ * @see https://github.com/moodlehq/moodle-mod_newmodule
+ * @see https://github.com/justinhunt/moodle-mod_pairwork
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'mod_collaborate';
-$plugin->version = 2022050111;
-$plugin->requires  = 2022041900.00; // 4.0 (Build: 20220419).
-$plugin->supported = array(400, 400);
-$plugin->release = 'V4.0.1.0';
-$plugin->maturity = MATURITY_STABLE;
+$tasks = [
+    [
+        'classname' => 'mod_collaborate\task\collaborate_scheduled',
+        'blocking' => 0,
+        'minute' => '*/1',
+        'hour' => '*',
+        'day' => '*',
+        'dayofweek' => '*',
+        'month' => '*'
+    ]
+];

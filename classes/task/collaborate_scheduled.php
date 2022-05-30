@@ -15,23 +15,35 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the version and other meta-info about the plugin
+ * Class for handling a scheduled task.
  *
- * @package    mod_collaborate
- * @copyright  2019 Richard Jones richardnz@outlook.com
- * @copyright  2021 G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}.
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @see https://github.com/moodlehq/moodle-mod_simplemod
- * @see https://github.com/justinhunt/moodle-mod_simplemod
- * @see https://github.com/richardjonesnz/moodle-mod_simplemod
- * @see https://github.com/gjb2048/moodle-mod_simplemod
+ * @package   mod_collaborate
+ * @copyright 2020 Richard Jones https://richardnz.net
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
  */
+namespace mod_collaborate\task;
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'mod_collaborate';
-$plugin->version = 2022050111;
-$plugin->requires  = 2022041900.00; // 4.0 (Build: 20220419).
-$plugin->supported = array(400, 400);
-$plugin->release = 'V4.0.1.0';
-$plugin->maturity = MATURITY_STABLE;
+/**
+ * A scheduled task.
+ *
+ * @package    mod_collaborate
+ * @since      Moodle 2.7
+ * @copyright  2015 Flash Gordon http://www.flashgordon.com
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class collaborate_scheduled extends \core\task\scheduled_task {
+
+    public function get_name() {
+        // Shown in admin screens
+        return get_string('exportall', 'mod_collaborate');
+    }
+
+    /**
+     *  Run all the tasks
+     */
+    public function execute() {
+        \mod_collaborate\local\submissions::export_all_submissions();
+    }
+}
