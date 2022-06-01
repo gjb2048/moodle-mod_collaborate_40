@@ -149,18 +149,19 @@ function collaborate_refresh_events($courseid = 0) {
  * this function will permanently delete the instance
  * and any data that depends on it.
  *
- * @param int $id Id of the module instance
- * @return boolean Success/Failure
+ * @param int $id Id of the module instance.
+ * @return boolean Success/Failure.
  */
 function collaborate_delete_instance($id) {
     global $DB;
 
-    if (! $collaborate = $DB->get_record('collaborate', array('id' => $id))) {
+    if (!$collaborate = $DB->get_record('collaborate', array('id' => $id))) {
         return false;
     }
 
     // Delete any dependent records here.
     $DB->delete_records('collaborate', array('id' => $collaborate->id));
+    $DB->delete_records('collaborate_submissions', array('collaborateid' => $collaborate->id));
 
     return true;
 }
