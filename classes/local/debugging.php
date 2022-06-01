@@ -26,15 +26,13 @@
 
 namespace mod_collaborate\local;
 
-defined('MOODLE_INTERNAL') || die();
-
 class debugging {
     public static function logit($message, $value) {
         error_log(print_r($message, true));
         error_log(print_r($value, true));
         try {
             throw new \Exception();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             error_log('Trace: '.$e->getTraceAsString().PHP_EOL);
         }
     }

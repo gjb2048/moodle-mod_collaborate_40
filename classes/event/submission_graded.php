@@ -23,7 +23,6 @@
  */
 
 namespace mod_collaborate\event;
-defined('MOODLE_INTERNAL') || die();
 
 class submission_graded extends \core\event\base {
     protected function init() {
@@ -42,9 +41,7 @@ class submission_graded extends \core\event\base {
      * @return string
      */
     public function get_description() {
-        return "The user with id '$this->userid' has
-                graded a submission with the id '$this->objectid'
-                in the Collaborate activity with course
-                module id '$this->contextinstanceid'.";
+        return "The user with id '$this->userid' has graded a submission with the id '$this->objectid' in the Collaborate activity".
+            " with course module id '$this->contextinstanceid'.";
     }
 }

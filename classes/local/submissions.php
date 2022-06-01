@@ -21,12 +21,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
  */
 namespace mod_collaborate\local;
+
 use \mod_collaborate\local\collaborate_editor;
 use \mod_collaborate\local\debugging;
 use \mod_collaborate\local\submission_form;
 use \core\dataformat;
-
-defined('MOODLE_INTERNAL') || die();
 
 class submissions {
     /**
@@ -157,12 +156,12 @@ class submissions {
     public static function get_export_data($collaborate, $context) {
         global $DB;
 
-        $sql = "SELECT s.id, u.firstname, u.lastname, s.submission, s.grade
-                    FROM {collaborate_submissions} s
-                    JOIN {collaborate} c ON s.collaborateid = c.id
-                    JOIN {user} u ON s.userid = u.id
-                    WHERE u.id <> 0
-                        AND s.collaborateid = :cid";
+        $sql = "SELECT s.id, u.firstname, u.lastname, s.submission, s.grade ".
+            "FROM {collaborate_submissions} s ".
+            "JOIN {collaborate} c ON s.collaborateid = c.id ".
+            "JOIN {user} u ON s.userid = u.id ".
+            "WHERE u.id <> 0 ".
+            "AND s.collaborateid = :cid";
 
         $records = $DB->get_records_sql($sql, ['cid' => $collaborate->id]);
 
@@ -206,12 +205,11 @@ class submissions {
         global $CFG, $DB;
 
         // Get the all Collaborate instances.
-        $sql = "SELECT s.id, u.firstname, u.lastname, s.submission,  s.grade,
-                   c.id AS cid, c.course
-                FROM {collaborate_submissions} s
-                JOIN {collaborate} c ON s.collaborateid = c.id
-                JOIN {user} u ON s.userid = u.id
-                WHERE u.id <> 0";
+        $sql = "SELECT s.id, u.firstname, u.lastname, s.submission,  s.grade, c.id AS cid, c.course ".
+            "FROM {collaborate_submissions} s ".
+            "JOIN {collaborate} c ON s.collaborateid = c.id ".
+            "JOIN {user} u ON s.userid = u.id ".
+            "WHERE u.id <> 0";
 
         $records = $DB->get_records_sql($sql);
         $submissions = array();

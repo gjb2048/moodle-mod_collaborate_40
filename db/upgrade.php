@@ -30,8 +30,6 @@
  * @see https://github.com/moodlehq/moodle-mod_simplemod
  * @see https://github.com/justinhunt/moodle-mod_simplemod*/
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Execute collaborate upgrade from the given old version
  *

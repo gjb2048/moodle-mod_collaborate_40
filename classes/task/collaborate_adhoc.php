@@ -23,8 +23,6 @@
  */
 namespace mod_collaborate\task;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * An adhoc task.
  *

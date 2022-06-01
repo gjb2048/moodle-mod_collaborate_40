@@ -34,5 +34,6 @@ if (is_siteadmin()) {
     $currentversionversion = $plugin->version;
     $newversion = $plugin->version - 1;
     set_config('version', $newversion, 'mod_collaborate');
-    echo 'Collaborate module downgraded to version: '.$newversion.' from config version '.$currentconfigversion.', version.php version '.$currentversionversion.'.';
+    echo 'Collaborate module downgraded to version: '.$newversion.' from config version '.$currentconfigversion.
+        ', version.php version '.$currentversionversion.'.';
 }

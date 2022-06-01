@@ -30,8 +30,6 @@
  * @see https://github.com/moodlehq/moodle-mod_simplemod
  * @see https://github.com/justinhunt/moodle-mod_simplemod */
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_collaborate\local\collaborate_editor;
 
 /* Moodle core API */
@@ -400,12 +398,10 @@ function collaborate_get_user_grades($collaborate, $userid = 0) {
     $grades = array();
     if (empty($userid)) {
         // All user attempts for this collaborate instance are in the submissions table.
-        $sql = "SELECT a.id, a.collaborateid,
-                       a.userid, a.grade,
-                       a.timecreated
-                  FROM {collaborate_submissions} a
-                 WHERE a.collaborateid = :cid
-              GROUP BY a.userid";
+        $sql = "SELECT a.id, a.collaborateid, a.userid, a.grade, a.timecreated ".
+            "FROM {collaborate_submissions} a ".
+            "WHERE a.collaborateid = :cid ".
+            "GROUP BY a.userid";
 
         $slusers = $DB->get_records_sql($sql, ['cid' => $collaborate->id]);
         if ($slusers) {
@@ -415,14 +411,12 @@ function collaborate_get_user_grades($collaborate, $userid = 0) {
                 $grades[$sluser->userid]->userid = $sluser->userid;
 
                 // Get this users attempts.
-                $sql = "SELECT a.id, a.collaborateid,
-                       a.userid, a.grade,
-                       a.timecreated
-                  FROM {collaborate_submissions} a
-            INNER JOIN {user} u
-                    ON u.id = a.userid
-                 WHERE a.collaborateid = :cid
-                   AND u.id = :uid";
+                $sql = "SELECT a.id, a.collaborateid, a.userid, a.grade, a.timecreated ".
+                    "FROM {collaborate_submissions} a ".
+                    "INNER JOIN {user} u ".
+                    "ON u.id = a.userid ".
+                    "WHERE a.collaborateid = :cid ".
+                    "AND u.id = :uid";
                 $attempts = $DB->get_records_sql($sql, ['cid' => $collaborate->id, 'uid' => $sluser->userid]);
                 // Apply grading method.
                 $grades[$sluser->userid]->rawgrade = \mod_collaborate\local\submissions::grade_user($attempts);
@@ -433,14 +427,12 @@ function collaborate_get_user_grades($collaborate, $userid = 0) {
 
     } else {
         // User grade for userid.
-        $sql = "SELECT a.id, a.collaborateid,
-                       a.userid, a.grade,
-                       a.timecreated
-                  FROM {collaborate_submissions} a
-            INNER JOIN {user} u
-                    ON u.id = a.userid
-                 WHERE a.collaborateid = :cid
-                   AND u.id = :uid";
+        $sql = "SELECT a.id, a.collaborateid, a.userid, a.grade, a.timecreated ".
+            "FROM {collaborate_submissions} a ".
+            "INNER JOIN {user} u ".
+            "ON u.id = a.userid ".
+            "WHERE a.collaborateid = :cid ".
+            "AND u.id = :uid";
 
         $attempts = $DB->get_records_sql($sql,
                 array('cid' => $collaborate->id,

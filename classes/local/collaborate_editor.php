@@ -23,8 +23,6 @@
  */
 namespace mod_collaborate\local;
 
-defined('MOODLE_INTERNAL') || die();
-
 class collaborate_editor {
 
     /**
